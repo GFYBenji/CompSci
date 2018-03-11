@@ -26,24 +26,26 @@ public class Calculator {
                     iter++;
                 }
 
-                /*if(iter < MAX_ITER -1){
+                if(iter < MAX_ITER -1){
                     I.setRGB(x,y, Color.white.getRGB());
                 }else{
                     I.setRGB(x,y, Color.black.getRGB());
                 }
-                */
-                I.setRGB(x,y, iter);
+
+                //I.setRGB(x,y, iter);
             }
         }
         return I;
     }
-    public BufferedImage juliaSet(){
-        cRe= 0.0; // -0.7;
-        cIm = 0.0; //0.27015;
+    public BufferedImage juliaSet(int pwr){
+        final long startTime = System.currentTimeMillis();
+        cRe= -0.7;
+        cIm = 0.27015;
         for(int y = 0; y < I.getHeight(); y++){
-            zIm = I.convertY(y);
+            Double yStart = I.convertY(y); //convert Y up here to be 25% faster(at 200 iterations)
             for (int x = 0; x < I.getWidth(); x ++){
-               zRe = I.convertX(x);
+                zIm = yStart; //I.convertY(y);
+                zRe = I.convertX(x);
                int iter = 0;
                while((zRe+cRe)*(zRe+cRe) + (zIm+cIm)*(zIm+cIm) < 4 && iter < MAX_ITER -1){
                    tmp = zRe *zRe -zIm*zIm +cRe;
@@ -52,14 +54,16 @@ public class Calculator {
                    iter++;
                }
                 if(iter < MAX_ITER -1){
-                    //I.setRGB(x,y, Color.white.getRGB());
-                    I.setRGB(x,y, iter);
+                    I.setRGB(x,y, Color.white.getRGB());
+
                 }else{
-                    //I.setRGB(x,y, Color.black.getRGB());
-                    I.setRGB(x,y, iter);
+                    I.setRGB(x,y, Color.black.getRGB());
                 }
+                //I.setRGB(x,y, iter);
             }
         }
+        final long endTime = System.currentTimeMillis();
+        System.out.println("Total execution time: " + (endTime - startTime) );
         return I;
     }
 

@@ -8,34 +8,34 @@ public class JuliaSet {
 
     private final int maxIter = 300;
     private final double zoom = 1;
-    private double cY, cX;
-    private BufferedImage I;
+    private double cRe, cIm;
+    private MyImage I;
 
     public JuliaSet(MyImage image) {
         I = image;
     }
 
     public BufferedImage draw() {
-        cX = -0.7;
-        cY = 0.27015;
+        cRe = -0.7;
+        cIm = 0.27015;
         double moveX = 0, moveY = 0;
-        double zx, zy;
+        double zRe, zIm;
         int w = I.getWidth();
         int h = I.getHeight();
 
         for (int x = 0; x < w; x++) {
             for (int y = 0; y < h; y++) {
-                zx = 1.5 * (x - w / 2) / (0.5 * zoom * w) + moveX;
-                zy = (y - h / 2) / (0.5 * zoom * h) + moveY;
+                zRe = I.convertX(x); //1.5 * (x - w / 2) / (0.5 * zoom * w) + moveX;
+                zIm = I.convertY(y);//(y - h / 2) / (0.5 * zoom * h) + moveY;
                 float i = maxIter;
-                while (zx * zx + zy * zy < 4 && i > 0) {
-                    double tmp = zx * zx - zy * zy + cX;
-                    zy = 2.0 * zx * zy + cY;
-                    zx = tmp;
+                while (zRe * zRe + zIm * zIm < 4 && i > 0) {
+                    double tmp = zRe * zRe - zIm * zIm + cRe;
+                    zIm = 2.0 * zRe * zIm + cIm;
+                    zRe = tmp;
                     i--;
                 }
-                int c = Color.HSBtoRGB((maxIter / i) % 1, 1, i > 0 ? 1 : 0);
-                I.setRGB(x, y, c);
+                /*int c = Color.HSBtoRGB((maxIter / i) % 1, 1, i > 0 ? 1 : 0);
+                I.setRGB(x, y, c);*/
             }
         }
         return I;
