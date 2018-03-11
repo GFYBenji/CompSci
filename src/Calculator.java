@@ -46,13 +46,13 @@ public class Calculator {
             for (int x = 0; x < I.getWidth(); x ++){
                 zIm = yStart; //I.convertY(y);
                 zRe = I.convertX(x);
-               int iter = 0;
-               while((zRe+cRe)*(zRe+cRe) + (zIm+cIm)*(zIm+cIm) < 4 && iter < MAX_ITER -1){
-                   tmp = zRe *zRe -zIm*zIm +cRe;
-                   zIm = 2.0 * zRe*zIm + cIm;
-                   zRe = tmp;
-                   iter++;
-               }
+                int iter = 0;
+                while((zRe+cRe)*(zRe+cRe) + (zIm+cIm)*(zIm+cIm) < 4 && iter < MAX_ITER -1){
+                    tmp = zRe *zRe -zIm*zIm +cRe;
+                    zIm = 2.0 * zRe*zIm + cIm;
+                    zRe = tmp;
+                    iter++;
+                }
                 if(iter < MAX_ITER -1){
                     I.setRGB(x,y, Color.white.getRGB());
 
