@@ -12,7 +12,7 @@ public class Calculator {
         I = image;
         MAX_ITER = iter;
     }
-    public BufferedImage mandelBrot(){
+    public MyImage mandelBrot(){
         for(int y = 0; y < I.getHeight(); y++){
             cIm = I.convertY(y);
             for(int x = 0; x <  I.getWidth(); x++){
@@ -31,13 +31,12 @@ public class Calculator {
                 }else{
                     I.setRGB(x,y, Color.black.getRGB());
                 }
-
-                //I.setRGB(x,y, iter);
             }
         }
+
         return I;
     }
-    public BufferedImage juliaSet(int pwr){
+    public MyImage juliaSet(){
         final long startTime = System.currentTimeMillis();
         cRe= -0.7;
         cIm = 0.27015;
@@ -48,7 +47,7 @@ public class Calculator {
                 zRe = I.convertX(x);
                 int iter = 0;
                 while((zRe+cRe)*(zRe+cRe) + (zIm+cIm)*(zIm+cIm) < 4 && iter < MAX_ITER -1){
-                    tmp = zRe *zRe -zIm*zIm +cRe;
+                    tmp = zRe * zRe - zIm * zIm + cRe;
                     zIm = 2.0 * zRe*zIm + cIm;
                     zRe = tmp;
                     iter++;
@@ -59,7 +58,6 @@ public class Calculator {
                 }else{
                     I.setRGB(x,y, Color.black.getRGB());
                 }
-                //I.setRGB(x,y, iter);
             }
         }
         final long endTime = System.currentTimeMillis();
