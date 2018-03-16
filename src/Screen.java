@@ -35,7 +35,9 @@ class Screen extends JPanel implements MouseListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getClickCount() == 2){
-            Plot pl = new Plot(-2.0,2.0,2.0,-2.0);
+            MyImage im = new MyImage(800,800, BufferedImage.TYPE_INT_RGB);
+            im.Plot(-2.0,2.0,2.0,-2.0);
+            prepGui(new Calculator(im,200).juliaSet());
 
         }
     }
