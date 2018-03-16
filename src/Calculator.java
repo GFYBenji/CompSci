@@ -36,10 +36,12 @@ public class Calculator {
 
         return I;
     }
-    public MyImage juliaSet(){
+    public MyImage juliaSet(Double re, Double im){
         final long startTime = System.currentTimeMillis();
-        cRe= -0.7;
-        cIm = 0.27015;
+        //cRe= -0.7;
+        //cIm = 0.27015;
+        cRe = re;
+        cIm = im;
         for(int y = 0; y < I.getHeight(); y++){
             Double yStart = I.convertY(y); //convert Y up here to be 25% faster(at 200 iterations)
             for (int x = 0; x < I.getWidth(); x ++){
