@@ -35,8 +35,8 @@ class Screen extends JPanel implements MouseListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getClickCount() == 2){
-            Calculator calc = new Calculator(I, 200);
-            prepGui(calc.juliaSet());
+            Plot pl = new Plot(-2.0,2.0,2.0,-2.0);
+
         }
     }
 
