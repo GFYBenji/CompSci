@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 class Screen extends JPanel implements MouseListener{
 
     private JFrame window;
-    private JLabel main, main2;
+    private JLabel main; // i need some way to set the image of the Juliaset window without changing the mandelbrot window
     private int windowX, windowY;
     private Double plotX, plotY;
     private MyImage I;
@@ -56,7 +56,7 @@ class Screen extends JPanel implements MouseListener{
         yE = I.convertY(e.getY());
         I.Plot(xS,yS,xE,yE);
         System.out.println("xS:" + xS + ",yS: " + yS +"\nxE: " + xE + ",yE: " + yE); //Just making sure the X,Y values are the right way round
-        new Calculator(I, 200).mandelBrot();
+        new Calculator(I, 200).mandelBrot(); //Not sure if it zooms in correctly
         main.setIcon(new ImageIcon(I));
         repaint();
     }
