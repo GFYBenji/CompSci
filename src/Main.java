@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Main {
@@ -8,6 +7,7 @@ public class Main {
         image.Plot(-2.0, 2.0, 2.0, -2.0, 800, 800);
         Calculator calc = new Calculator(image, 300);
         Screen window = new Screen(calc.mandelBrot());
+        //Screen window = new Screen(calc.juliaSet(0.0,0.0));
     }
 
 }

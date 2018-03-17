@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Calculator {
 
@@ -13,6 +12,7 @@ public class Calculator {
         MAX_ITER = iter;
     }
     public MyImage mandelBrot(){
+        final long startTime = System.currentTimeMillis();
         for(int y = 0; y < I.getHeight(); y++){
             cIm = I.convertY(y);
             for(int x = 0; x <  I.getWidth(); x++){
@@ -33,7 +33,8 @@ public class Calculator {
                 }
             }
         }
-
+        final long endTime = System.currentTimeMillis();
+        System.out.println("Total execution time: " + (endTime - startTime));
         return I;
     }
     public MyImage juliaSet(Double re, Double im){
