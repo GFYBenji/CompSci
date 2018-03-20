@@ -31,6 +31,7 @@ public class Calculator {
                 }else{
                     I.setRGB(x,y, Color.black.getRGB());
                 }
+                //I.setRGB(x,y,makeColors(iter));
             }
         }
         final long endTime = System.currentTimeMillis();
@@ -66,6 +67,13 @@ public class Calculator {
         final long endTime = System.currentTimeMillis();
         System.out.println("Total execution time: " + (endTime - startTime) );
         return I;
+    }
+    private int makeColors(int iter ){
+        int r = (iter>>16) & 255;
+        int g = (iter>>8) & 255;
+        int b = iter & 255;
+        Color cool = new Color(r,g,b);
+        return cool.getRGB();
     }
 
 }
