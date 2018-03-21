@@ -4,15 +4,15 @@ import java.awt.event.MouseListener;
 
 class Screen extends JPanel implements MouseListener{
 
-    private JLabel main; // i need some way to set the image of the Juliaset window without changing the mandelbrot window
-    private int windowX, windowY;
-    private Double plotX, plotY;
     private MyImage I;
-    private Double xS, yS;
+    private JLabel main;
+    private int xx, yy, width, height;
 
     public Screen(MyImage image){
         I = image;
         mandelFrame();
+        width = I.getWidth();
+        height = I.getHeight();
         //juliaFrame(I);
     }
 
@@ -51,37 +51,32 @@ class Screen extends JPanel implements MouseListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.isAltDown()) { //Using a key modifier so that when executing the double click for the Julia Set it doesnt execute both
-            //Mandelbrot zoom
-            xS = I.convertX(e.getX());
-            yS = I.convertY(e.getY());
-        }
-        if (e.getClickCount() == 2) {
-            //Juliaset
-            Double re, im;
-            I.Plot(-2.0, 2.0, 2.0, -2.0);
-            re = I.convertX(e.getX());
-            im = I.convertY(e.getY());
-            Calculator calc = new Calculator(I, 200);
-            juliaFrame(calc.juliaSet(re, im));
-            System.out.println("Jesus is the bread");
-        }
+        xx = e.getX();
+        yy = e.getY();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (e.isAltDown()) {
-            Double xE, yE;
-            xE = I.convertX(e.getX());
-            yE = I.convertY(e.getY());
-            I.Plot(xS, yS, xE, yE);
+        double StartX, StartY, EndX, EndY, re, im;
+        if (xx == e.getX() || yy == e.getY()) {
+            MyImage image = new MyImage(width, height, MyImage.TYPE_INT_RGB);
+            image.Plot(-2.0, 2.0, 2.0, -2.0);
+            re = image.convertX(xx);
+            im = image.convertY(yy);
+            Calculator calc = new Calculator(image, 200);
+            juliaFrame(calc.juliaSet(re, im));
+        } else {
+            StartX = I.convertX(xx);
+            StartY = I.convertY(yy);
+            EndX = I.convertX(e.getX());
+            EndY = I.convertY(e.getY());
+            I.Plot(StartX, StartY, EndX, EndY);
             Calculator calc = new Calculator(I, 200);
             main.setIcon(new ImageIcon(calc.mandelBrot()));
             repaint();
-            System.out.println("Memes r cool");
         }
-    }
 
+    }
     @Override
     public void mouseEntered(MouseEvent e) {
         //When the mouse enters the JFrame
@@ -90,5 +85,6 @@ class Screen extends JPanel implements MouseListener{
     @Override
     public void mouseExited(MouseEvent e) {
         //When the mouse leaves the JFrame
+        //System.out.println("Help");
     }
 }
