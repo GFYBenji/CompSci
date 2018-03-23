@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 
 public class Main {
@@ -9,9 +8,7 @@ public class Main {
         Calculator calc = new Calculator(image, 300);
         //Screen window = new Screen(calc.mandelBrot());
         //Screen window = new Screen(calc.juliaSet(0.0,0.0));
-        JuliaScreen js = new JuliaScreen(calc.juliaSet(0.0, 0.0));
-        js.makeGui(3, "Tit", new JLabel());
-
+        new MandelScreen();
     }
 
 }
