@@ -1,42 +1,29 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-public class JuliaScreen extends MandelScreen {
+public class JuliaScreen extends MyScreen {
 
 
     private int xx, yy, width, height;
     private JLabel main;
     private Calculator calc;
+    //private double xS, yS, xE, yE;
+    private int im, re;
 
-    JuliaScreen() {
-        MyImage I = new MyImage(800, 800, BufferedImage.TYPE_INT_RGB);
-        I.Plot(-2.0, 2.0, 2.0, -2.0);
-        Calculator calc = new Calculator(I, 200);
-        makeGui(2, "Julia", calc.juliaSet(0.0, 0.0));
-    }
-
-    //region methods
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    JuliaScreen(String title, int re, int im) {
+        super(title);
+        this.re = re;
+        this.im = im;
 
     }
-
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
+    public MyImage makeImage(double xS, double yS, double xE, double yE) {
+        MyImage image = new MyImage(800, 800, BufferedImage.TYPE_INT_RGB);
+        image.Plot(xS, yS, xE, yE);
+        Calculator calc = new Calculator(image, 200);
+        //return calc.juliaSet(image.convertX(re),image.convertY(im));
+        return calc.juliaSet(0.285, 0.01);
     }
 
     @Override
@@ -44,33 +31,4 @@ public class JuliaScreen extends MandelScreen {
 
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
-    //endregion
 }

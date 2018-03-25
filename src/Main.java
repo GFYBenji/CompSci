@@ -8,7 +8,8 @@ public class Main {
         Calculator calc = new Calculator(image, 300);
         //Screen window = new Screen(calc.mandelBrot());
         //Screen window = new Screen(calc.juliaSet(0.0,0.0));
-        new MandelScreen();
+        //new MandelScreen();
+        new MyScreen("Mandel");
     }
 
 }
